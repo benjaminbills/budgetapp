@@ -1,0 +1,7 @@
+{% macro displayError(error_list) %}
+  {% for error in error_list %}
+  <div class="invalid-feedback">
+    <span>{{error}}</span>
+  </div>
+  {% endfor %}
+{% endmacro %}

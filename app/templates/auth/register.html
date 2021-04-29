@@ -1,0 +1,53 @@
+{% extends 'base.html'%}
+{% import 'macros.html' as macro%}
+{% block styles%}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}">
+    
+{% endblock %}
+{% block content %}
+<div class="container pt-5">
+  {% for message in get_flashed_messages() %}
+        <div class="alert alert-danger">
+        {{ message }}
+        </div>
+  {% endfor %}
+  <form method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Username</label>
+      {% if register_form.username.errors %}
+      {{register_form.username(class="form-control is-invalid")}}
+          {{macro.displayError(register_form.username.errors)}}
+      {% else %}
+      {{register_form.username(class="form-control")}}
+      {% endif %}
+    </div >
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      {% if register_form.email.errors %}
+      {{register_form.email(class="form-control is-invalid")}}
+          {{macro.displayError(register_form.email.errors)}}
+      {% else %}
+      {{register_form.email(class="form-control")}}
+      {% endif %}
+    </div >
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Password</label>
+      {% if register_form.password.errors %}
+      {{register_form.password(class="form-control is-invalid")}}
+          {{macro.displayError(register_form.password.errors)}}
+      {% else %}
+      {{register_form.password(class="form-control")}}
+      {% endif %}
+    </div >
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+      {{register_form.password_confirm(class_='form-control')}}
+    </div>
+    <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+    {{register_form.submit(class_='btn btn-primary')}}
+  </form>
+</div>
+
+{% endblock%}

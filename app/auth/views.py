@@ -13,5 +13,8 @@ def login():
 
 @auth.route('/register',methods = ["GET","POST"])
 def register():
+    register_form = RegistrationForm()
+    if register_form.validate_on_submit():
+      print('yes')
     return render_template('auth/register.html', register_form=register_form)
 
