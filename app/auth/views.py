@@ -7,7 +7,9 @@ from .forms import LoginForm,RegistrationForm
 
 @auth.route('/login',methods=['GET','POST'])
 def login():
-    return render_template('auth/login.html', login_form = login_form)
+    login_form = LoginForm()
+    
+    return render_template('auth/login.html', login_form=login_form)
 
 @auth.route('/register',methods = ["GET","POST"])
 def register():
