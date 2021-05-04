@@ -1,16 +1,36 @@
 {% extends 'base.html'%}
 
-<!-- Styles block -->
-
-{% block styles%}
-    {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}">
-    
-{% endblock %}
 
 {% block content %}
-<div class="container">
-
+<div class="container pt-4">
+  <form method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <label for="description">Description</label>
+    {{form.description(class_='form-control')}}
+    <label for="category">Category</label>
+    {{form.category(class_='form-control')}}
+    <label for="amount">Ammount</label>
+    {{form.ammount(class_='form-control')}}
+    <label for="date">Date</label>
+    {{form.date(class_='form-control',type='date')}}
+    {{form.submit}}
+  </form>
 </div>
-
+<hr>
+<div class="container pt-3">
+  <table class="table table-striped">
+    <tbody>
+      {% for expense in expenses %}
+      <tr>
+        <td>{{expense.description}}</td>
+        <td>{{expense.category}}</td>
+        <td>{{expense.date.strftime('%Y-%m-%d')}}</td>
+        <td>{{expense.ammount}}</td>
+        <td><a href="{{url_for('main.delete_expense', id = expense.id)}}"><i class="far fa-trash-alt"></i></a></td>
+      </tr>
+      
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock%}
