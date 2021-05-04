@@ -13,6 +13,7 @@
         </div>
   {% endfor %}
   <form method="POST">
+    <legend>Sign Up Here!</legend>
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Username</label>
@@ -48,6 +49,9 @@
     <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
     {{register_form.submit(class_='btn btn-primary')}}
   </form>
-</div>
+  <div>
+    <small>Already Registered? <a href="{{ url_for('auth.login') }}">Login</a></small>
+  </div>
+</div>  
 
 {% endblock%}
