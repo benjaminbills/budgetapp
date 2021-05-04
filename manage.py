@@ -7,10 +7,11 @@ from flask_migrate import Migrate, MigrateCommand
 app = create_app("development")
 
 manager = Manager(app)
-migrate = Migrate(app,db)
+migrate = Migrate(app, db)
 
 manager.add_command("server", Server)
-manager.add_command('db',MigrateCommand)
+manager.add_command('db', MigrateCommand)
+
 
 @manager.command
 def test():
@@ -20,9 +21,11 @@ def test():
     tests = unittest.TestLoader().discover("test")
     unittest.TextTestRunner(verbosity=2).run(tests)
 
+
 @manager.shell
 def make_shell_context():
-    return dict(app = app,db = db,User = User )
+    return dict(app=app, db=db, User=User)
+
 
 if __name__ == "__main__":
     manager.run()
