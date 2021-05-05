@@ -9,12 +9,25 @@
     {{form.description(class_='form-control')}}
     <label for="category">Category</label>
     {{form.category(class_='form-control')}}
-    <label for="amount">Ammount</label>
+    <label for="amount">Amount</label>
     {{form.ammount(class_='form-control')}}
     <label for="date">Date</label>
     {{form.date(class_='form-control',type='date')}}
     {{form.submit}}
   </form>
+  <div class="pt-4">
+    <botton class="btn btn-secondary">
+      <a href="{{url_for('main.update_salary',username=user.username)}}">Add Salary</a>
+    </botton>
+    {% if user.salary %}
+    <botton class="btn btn-secondary">
+      Monthly Income: {{user.salary}}
+    </botton>
+    {%endif%}
+    <botton class="btn btn-secondary">
+      Total Amount Left: {{total_amount_left}}
+    </botton>
+  </div>
 </div>
 <hr>
 <div class="container pt-3">
@@ -25,12 +38,45 @@
         <td>{{expense.description}}</td>
         <td>{{expense.category}}</td>
         <td>{{expense.date.strftime('%Y-%m-%d')}}</td>
-        <td>{{expense.ammount}}</td>
+        <td>ksh {{expense.ammount}}</td>
         <td><a href="{{url_for('main.delete_expense', id = expense.id)}}"><i class="far fa-trash-alt"></i></a></td>
       </tr>
-      
       {% endfor %}
+      {% if check_length != 0%}
+      <tr>
+        <td colspan="3">Total Expenses</td>
+        <td class="table-active">ksh {{total_expenses}}</td>
+      </tr>
+      {%endif%}
     </tbody>
   </table>
 </div>
+{% if check_length != 0%}
+
+<canvas id="lineChart" width="900" height="400"></canvas>
+{%endif%}
 {% endblock%}
+{% block script %}
+<script>
+  var ctx = document.getElementById('lineChart').getContext('2d');
+  var lineChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: {{expenses_date | safe}},
+      datasets: [
+        {
+          label: 'Data points',
+          data: {{expenses_list | safe}},
+          fill: false,
+          borderColor: 'rgb(75,192,192)',
+          lineTension:0.1
+        }
+      ]
+    },
+    options: {
+      responsive:true
+    }
+   
+  });
+</script>
+{% endblock %}

@@ -10,3 +10,7 @@ class ExpenseForm(FlaskForm):
   ammount = FloatField('Ammount', validators=[Required()])
   date = DateField('Date',validators=[Required()])
   submit = SubmitField('Submit')
+
+class SalaryForm(FlaskForm):
+  salary = FloatField('Salary', validators=[Required()])
+  submit = SubmitField('Submit')
