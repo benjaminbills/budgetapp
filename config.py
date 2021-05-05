@@ -16,11 +16,11 @@ class ProdConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     """
-    # uri = os.getenv("DATABASE_URL")  # or other relevant config var
-    # if uri.startswith("postgres://"):
-    #     uri = uri.replace("postgres://", "postgresql://", 1)
-    # SQLALCHEMY_DATABASE_URI = uri
-    pass
+    uri = os.getenv("DATABASE_URL")  # or other relevant config var
+    if uri.startswith("postgres://"):
+        uri = uri.replace("postgres://", "postgresql://", 1)
+    SQLALCHEMY_DATABASE_URI = uri
+    # pass
 
 
 class DevConfig(Config):
