@@ -13,7 +13,7 @@
         </div>
   {% endfor %}
   <form method="POST">
-    <legend>Sign Up Here!</legend>
+    <legend class="border-bottom mb-4">Sign Up Here!</legend>
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Username</label>
