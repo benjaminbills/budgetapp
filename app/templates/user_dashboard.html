@@ -3,14 +3,14 @@
 
 {% block content %}
 <div class="text-center mt-4">
-<button type="button" class="btn-success btn-rounded mb-4 btn-lg " data-bs-toggle="modal" data-bs-target="#deleteModal">Launch
+<button type="button" class="btn-success btn-rounded mb-4 btn-lg" data-bs-toggle="modal" data-bs-target="#expenditureModal">Launch
   Expenditure Form</button>
 </div>
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="expenditureModal" tabindex="-1" aria-labelledby="expenditureModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-center" id="deleteModalLabel">Welcome {{ user.username }}</h5>
+        <h5 class="modal-title text-center" id="expenditureModalLabel">Welcome {{ user.username }}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -35,17 +35,39 @@
     </div>
   </div>
 </div>
-
+<div>
+  <a class="text-decoration-none text-dark" href="{{url_for('main.update_salary',username=user.username)}}">Add Salary</a>
+</div>
 <div class="container pt-4 text-center">  
   <div class="pt-4">
-    <button class="btn btn-success">
-      <a class="text-decoration-none text-white" href="{{url_for('main.update_salary',username=user.username)}}">Add Salary</a>
+    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#salaryModal">Add Salary
     </button>
+    <div class="modal fade" id="salaryModal" tabindex="-1" aria-labelledby="salaryModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center" id="salaryModalLabel">Welcome {{ user.username }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+              {{form.salary}}
+              {{form.submit}}
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     {% if user.salary %}
-    <button class="btn btn-secondary">
-      Monthly Income: {{user.salary}}
-    </button>
-    {%endif%}
+              <button class="btn btn-secondary">
+                Monthly Income: {{user.salary}}
+              </button>
+              {%endif%}
     <button class="btn btn-warning">
       Total Amount Left: {{total_amount_left}}
     </button>
