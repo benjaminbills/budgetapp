@@ -55,6 +55,10 @@ On your terminal run
 
         $ python3 manage.py test
 
+## ER DIAGRAM
+
+![ER DIAGRAM](app/static/photo/image.png)
+
 ## Code used sample
 ```python
 from flask import Flask
