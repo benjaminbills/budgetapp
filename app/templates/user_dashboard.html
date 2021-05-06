@@ -39,7 +39,7 @@
         <td>{{expense.category}}</td>
         <td>{{expense.date.strftime('%Y-%m-%d')}}</td>
         <td>ksh {{expense.ammount}}</td>
-        <td><a href="{{url_for('main.delete_expense', id = expense.id)}}"><i class="far fa-trash-alt"></i></a></td>
+        <td><a href="{{url_for('main.delete_expense', id = expense.id, username=user.username)}}"><i class="far fa-trash-alt"></i></a></td>
       </tr>
       {% endfor %}
       {% if check_length != 0%}
@@ -52,8 +52,14 @@
   </table>
 </div>
 {% if check_length != 0%}
-
-<canvas id="lineChart" width="900" height="400"></canvas>
+<div class="container">
+  <canvas id="lineChart" width="900" height="400"></canvas>
+</div>
+{%endif%}
+{% if check_length != 0%}
+<div class="container pt-3">
+  <canvas id="doughnutChart" width="900" height="400"></canvas>
+</div>
 {%endif%}
 {% endblock%}
 {% block script %}
@@ -62,11 +68,11 @@
   var lineChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: {{expenses_date | safe}},
+      labels: {{dates_label | safe}},
       datasets: [
         {
           label: 'Data points',
-          data: {{expenses_list | safe}},
+          data: {{over_time_expenditure | safe}},
           fill: false,
           borderColor: 'rgb(75,192,192)',
           lineTension:0.1
@@ -76,7 +82,29 @@
     options: {
       responsive:true
     }
-   
+  });
+  var ctx = document.getElementById('doughnutChart').getContext('2d');
+  var doughnutChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: {{category_list | safe}},
+      datasets: [
+        {
+          label: 'Salary Data',
+          data: {{category_amount | safe}},
+          borderColor: [
+            'rgb(75,192,192)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)',
+            'rgb(255, 99, 132)'
+        ],
+        hoverOffset:4
+        }
+      ]
+    },
+    options: {
+      responsive:true
+    }
   });
 </script>
 {% endblock %}

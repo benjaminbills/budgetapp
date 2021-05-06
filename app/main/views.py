@@ -24,12 +24,31 @@ def dashboard(username):
     expenses_date = []
     check_length = 0
     total_expenses = 0
+    income_expense = []
+    dates_label = []
+    over_time_expenditure = []
+    category_list = []
+    category_amount = []
+    category_comparison = db.session.query(db.func.sum(Expense.ammount), Expense.category).group_by(Expense.category).order_by(Expense.category).all()
+    dates = db.session.query(db.func.sum(Expense.ammount), Expense.date).group_by(Expense.date).order_by(Expense.date).all()
+    print(category_comparison)
     user = User.query.filter_by(username = username).first()
     expenses = Expense.query.order_by(asc(Expense.date))
+    for amount, date in dates:
+        dates_label.append(date.strftime("%m-%d-%y"))
+        over_time_expenditure.append(amount)
+    
+    # print(over_time_expenditure)
     for expense in expenses:
         expenses_list.append(expense.ammount)
         expenses_date.append(expense.date.strftime('%Y-%m-%d'))
         total_expenses = sum(expenses_list)
+    for category in category_comparison:
+        category_list.append(category.category)
+        category_amount.append(category[0])
+    print(category_list)
+    print(category_amount)
+
     total_amount_left = user.salary - total_expenses
     check_length = len(expenses_list)
     form = ExpenseForm()
@@ -42,9 +61,22 @@ def dashboard(username):
         new_expense = Expense(description=description,category=category,ammount=ammount,date=date, user_id=user_id)
         new_expense.save_expense()
         return redirect(url_for('.dashboard', username = user.username))
-    return render_template('user_dashboard.html', form=form, expenses=expenses, total_expenses=total_expenses, expenses_date=expenses_date, expenses_list=expenses_list,check_length=check_length, user = user, total_amount_left = total_amount_left)
+    return render_template(
+        'user_dashboard.html', 
+        form=form, expenses=expenses, 
+        total_expenses=total_expenses, 
+        expenses_date=expenses_date, 
+        expenses_list=expenses_list,
+        check_length=check_length, 
+        user = user, 
+        total_amount_left = total_amount_left,
+        over_time_expenditure = over_time_expenditure,
+        dates_label = dates_label,
+        category_amount = category_amount,
+        category_list = category_list
+        )
 
-@main.route('/expense/delete/<int:id>')
+@main.route('/expense/delete/<int:id>/<username>')
 @login_required
 def delete_expense(id, username):
     user = User.query.filter_by(username = username).first()
