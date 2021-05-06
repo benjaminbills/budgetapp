@@ -44,3 +44,13 @@ This is an expenditure tracking application that allows authentication, add, del
 
        export SECRET_KEY=<you api key>
        python3 manage.py server
+
+## Run the app now
+On your terminal run
+
+        $ chmod +x start.sh
+        $ ./start.sh
+
+## Test the application
+
+        $ python3 manage.py test
