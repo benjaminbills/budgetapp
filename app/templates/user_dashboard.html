@@ -2,39 +2,92 @@
 
 
 {% block content %}
-<div class="container pt-4">
-  <form method="POST">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-    <label for="description">Description</label>
-    {{form.description(class_='form-control')}}
-    <label for="category">Category</label>
-    {{form.category(class_='form-control')}}
-    <label for="amount">Amount</label>
-    {{form.ammount(class_='form-control')}}
-    <label for="date">Date</label>
-    {{form.date(class_='form-control',type='date')}}
-    {{form.submit}}
-  </form>
+<div class="text-center mt-4">
+<button type="button" class="btn-success btn-rounded mb-4 btn-lg" data-bs-toggle="modal" data-bs-target="#expenditureModal">Launch
+  Expenditure Form</button>
+</div>
+<div class="modal fade" id="expenditureModal" tabindex="-1" aria-labelledby="expenditureModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="expenditureModalLabel">Welcome {{ user.username }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+          <label for="description">Description</label>
+          {{form.description(class_='form-control')}}
+          <label for="category">Category</label>
+          {{form.category(class_='form-control')}}
+          <label for="amount">Amount</label>
+          {{form.ammount(class_='form-control')}}
+          <label for="date">Date</label>
+          {{form.date(class_='form-control',type='date')}}
+          <br>
+          {{form.submit(class_='btn btn-success')}}          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <a class="text-decoration-none text-dark" href="{{url_for('main.update_salary',username=user.username)}}">Add Salary</a>
+</div>
+<div class="container pt-4 text-center">  
   <div class="pt-4">
-    <botton class="btn btn-secondary">
-      <a href="{{url_for('main.update_salary',username=user.username)}}">Add Salary</a>
-    </botton>
+    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#salaryModal">Add Salary
+    </button>
+    <div class="modal fade" id="salaryModal" tabindex="-1" aria-labelledby="salaryModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center" id="salaryModalLabel">Welcome {{ user.username }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+              {{form.salary}}
+              {{form.submit}}
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     {% if user.salary %}
-    <botton class="btn btn-secondary">
-      Monthly Income: {{user.salary}}
-    </botton>
-    {%endif%}
-    <botton class="btn btn-secondary">
+              <button class="btn btn-secondary">
+                Monthly Income: {{user.salary}}
+              </button>
+              {%endif%}
+    <button class="btn btn-warning">
       Total Amount Left: {{total_amount_left}}
-    </botton>
+    </button>
   </div>
 </div>
 <hr>
 <div class="container pt-3">
-  <table class="table table-striped">
+  <table class="table table-striped table-bordered">
     <tbody>
+      <thead class="text-center bg-dark text-white">
+        <tr>
+          <th scope="col">Description</th>
+          <th scope="col">Category</th>
+          <th scope="col">Date</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
       {% for expense in expenses %}
-      <tr>
+      <tr class="text-center">
         <td>{{expense.description}}</td>
         <td>{{expense.category}}</td>
         <td>{{expense.date.strftime('%Y-%m-%d')}}</td>
@@ -44,13 +97,15 @@
       {% endfor %}
       {% if check_length != 0%}
       <tr>
-        <td colspan="3">Total Expenses</td>
-        <td class="table-active">ksh {{total_expenses}}</td>
+        <td colspan="3"><h3> Total Expenses </h3></td>
+        <td class="table-active text-center bg-secondary pt-3 text-white">ksh {{total_expenses}}</td>
       </tr>
       {%endif%}
     </tbody>
   </table>
 </div>
+<br>
+<br>
 {% if check_length != 0%}
 <div class="container">
   <canvas id="lineChart" width="900" height="400"></canvas>

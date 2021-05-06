@@ -11,13 +11,16 @@
           <a class="nav-link active text-white" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{url_for('main.dashboard', username = current_user.username)}}">Dashboard</a>
+          <a class="nav-link text-white" aria-current="page" href="#about-us">About</a>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
         {% if current_user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page">{{current_user.username}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{url_for('main.dashboard', username = current_user.username)}}">Dashboard</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{url_for('auth.logout')}}">Log out</a>

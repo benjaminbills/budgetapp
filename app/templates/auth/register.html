@@ -47,10 +47,10 @@
       {{register_form.password_confirm(class_='form-control')}}
     </div>
     <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-    {{register_form.submit(class_='btn btn-primary')}}
+    {{register_form.submit(class_='btn btn-secondary')}}
   </form>
   <div>
-    <small>Already Registered? <a href="{{ url_for('auth.login') }}">Login</a></small>
+    <small>Already Registered? <a class="text-info" href="{{ url_for('auth.login') }}">Login</a></small>
   </div>
 </div>  
 
