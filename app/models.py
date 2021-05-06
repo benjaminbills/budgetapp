@@ -16,6 +16,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255), index=True)
     salary = db.Column(db.Integer, default=0)
+    expenses = db.relationship("Expense", backref="user", lazy="dynamic")
     email = db.Column(db.String(255), unique=True, index=True)
     password_hash = db.Column(db.String(255))
 

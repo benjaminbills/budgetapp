@@ -21,7 +21,6 @@ def index():
 @login_required
 def dashboard(username):
     expenses_list = []
-    expenses_date = []
     check_length = 0
     total_expenses = 0
     income_expense = []
@@ -38,10 +37,9 @@ def dashboard(username):
         dates_label.append(date.strftime("%m-%d-%y"))
         over_time_expenditure.append(amount)
     
-    # print(over_time_expenditure)
+    
     for expense in expenses:
         expenses_list.append(expense.ammount)
-        expenses_date.append(expense.date.strftime('%Y-%m-%d'))
         total_expenses = sum(expenses_list)
     for category in category_comparison:
         category_list.append(category.category)
@@ -63,10 +61,9 @@ def dashboard(username):
         return redirect(url_for('.dashboard', username = user.username))
     return render_template(
         'user_dashboard.html', 
-        form=form, expenses=expenses, 
+        form=form, 
+        expenses=expenses, 
         total_expenses=total_expenses, 
-        expenses_date=expenses_date, 
-        expenses_list=expenses_list,
         check_length=check_length, 
         user = user, 
         total_amount_left = total_amount_left,
