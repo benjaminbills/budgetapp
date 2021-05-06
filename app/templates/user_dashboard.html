@@ -71,7 +71,7 @@
       labels: {{dates_label | safe}},
       datasets: [
         {
-          label: 'Data points',
+          label: 'Amount/day',
           data: {{over_time_expenditure | safe}},
           fill: false,
           borderColor: 'rgb(75,192,192)',
@@ -92,11 +92,14 @@
         {
           label: 'Salary Data',
           data: {{category_amount | safe}},
-          borderColor: [
+          backgroundColor: [
             'rgb(75,192,192)',
             'rgb(54, 162, 235)',
             'rgb(255, 205, 86)',
-            'rgb(255, 99, 132)'
+            'rgb(0, 51, 51)',
+            'rgb(100, 100, 100)',
+            'rgb(160, 160, 160)',
+            'rgb(205, 160, 160)'
         ],
         hoverOffset:4
         }
