@@ -81,3 +81,6 @@ from app import views
 
 ### Email: Elrophi@gmail.com and obafemibenjamins@gmail.com
 ### Contact: 0700 000 000
+
+### Copyright and License
+[MIT License](https://github.com/Elrophi/flask-quote/blob/master/LICENSE)
