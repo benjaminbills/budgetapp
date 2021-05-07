@@ -1,6 +1,7 @@
 This is an expenditure tracking application that allows authentication, add, delete and edit Spendings. Also displays a graph and chart with your expenses.
 >## Authors: 
-[Benjamin Obafemi](https://github.com/benjaminbills/budgetapp)[El-rophi Skwaila](https://github.com/benjaminbills/budgetapp)
+- [Benjamin Obafemi](https://github.com/benjaminbills/budgetapp)
+- [El-rophi Skwaila](https://github.com/benjaminbills/budgetapp)
 
 ---
 
