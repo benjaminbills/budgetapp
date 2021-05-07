@@ -57,7 +57,7 @@ On your terminal run
 
 ## ER DIAGRAM
 
-![ER DIAGRAM](app/static/photo/image.png)
+![ER DIAGRAM](app/static/photo/erdiagram.jpeg)
 
 ## Code used sample
 ```python
