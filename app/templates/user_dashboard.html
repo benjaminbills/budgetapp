@@ -87,13 +87,29 @@
 <br>
 <br>
 {% if check_length != 0%}
-<div class="container">
-  <canvas id="lineChart" width="900" height="400"></canvas>
+<div class="container" style="display: flex; justify-content: center;">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+  <div class="card card-style mb-2">
+    <div class="card-body">
+      <div class="container">
+        <canvas id="lineChart" max-width="900" max-height="400"></canvas>
+      </div>
+  </div>
+  </div>
+</div>
 </div>
 {%endif%}
 {% if check_length != 0%}
+<div class="container" style="display: flex; justify-content: center;">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+    <div class="card card-style mb-2">
+      <div class="card-body">
 <div class="container pt-3">
-  <canvas id="doughnutChart" width="900" height="400"></canvas>
+  <canvas id="doughnutChart" max-width="900" max-height="400"></canvas>
+</div>
+</div>
+</div>
+</div>
 </div>
 {%endif%}
 {% endblock%}

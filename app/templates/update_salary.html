@@ -3,19 +3,24 @@
 
 {% block content %}
 <div class="bg-image" 
-style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
-       height: 100vh">
+>
   <div class="container text-center ">
     <h1 class="hit-the-floor">EXP-APP</h1>
-    <img src="https://www.w3schools.com/bootstrap/bird.jpg" class="rounded-circle" alt="Bird" width="350" height="350">
+    <img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=995&q=80" class="rounded-circle" alt="Bird" width="350" height="350">
     <br>
-    <form method="POST">
+    <form method="POST" class="row g-3" class="container" style="display: flex; justify-content: center;">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-      {{form.salary}}
-      {{form.submit}}
+      <div class="col-auto">
+
+        {{form.salary(class_='form-control')}}
+      </div>
+      <div class="col-auto">
+
+        {{form.submit(class_='btn btn-success')}}
+      </div>
     </form>
     <h3>Input your salary!</h3>
-    <p><a class="nav-link " aria-current="page" href="{{url_for('main.dashboard', username = current_user.username)}}">Dashboard</a></p>
+    <p><a class="nav-link " aria-current="page" href="{{url_for('main.dashboard', username = current_user.username)}}">Go Back Dashboard</a></p>
   </div>
 </div>
 
