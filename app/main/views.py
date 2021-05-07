@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, abort
 from . import main
 from flask_login import login_required, current_user
 from .. import db
@@ -32,6 +32,8 @@ def dashboard(username):
     dates = db.session.query(db.func.sum(Expense.ammount), Expense.date).group_by(Expense.date).order_by(Expense.date).all()
     print(category_comparison)
     user = User.query.filter_by(username = username).first()
+    if user is None:
+        abort(404)
     expenses = Expense.query.order_by(asc(Expense.date))
     for amount, date in dates:
         dates_label.append(date.strftime("%m-%d-%y"))
@@ -77,6 +79,8 @@ def dashboard(username):
 @login_required
 def delete_expense(id, username):
     user = User.query.filter_by(username = username).first()
+    if user is None:
+        abort(404)
     expense = Expense.query.filter_by(id=id).first()
     db.session.delete(expense)
     db.session.commit()
