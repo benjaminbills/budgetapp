@@ -2,12 +2,21 @@
 
 
 {% block content %}
-<div class="container pt-4">
-  <form method="POST">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-    {{form.salary}}
-    {{form.submit}}
-  </form>
+<div class="bg-image" 
+style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+       height: 100vh">
+  <div class="container text-center ">
+    <h1 class="hit-the-floor">EXP-APP</h1>
+    <img src="https://www.w3schools.com/bootstrap/bird.jpg" class="rounded-circle" alt="Bird" width="350" height="350">
+    <br>
+    <form method="POST">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+      {{form.salary}}
+      {{form.submit}}
+    </form>
+    <h3>Input your salary!</h3>
+    <p><a class="nav-link " aria-current="page" href="{{url_for('main.dashboard', username = current_user.username)}}">Dashboard</a></p>
+  </div>
 </div>
 
 {% endblock%}

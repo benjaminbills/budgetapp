@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+html{
+  scroll-behavior: smooth;
+}
+
+/* font */
+.navbar-brand{
+  font-family: 'Pacifico', cursive;
+}
+
+.bg-1 { 
+  background-color: #488148;
+  color: #ffffff;
+  
+}
 img{
     background-position: center;
     background-repeat: no-repeat;
@@ -34,7 +49,7 @@ img{
     border-radius: 15px 50px;
     width:400px;
     padding: 1%;
-    font-family:monospace;
+    font-family: monospace;
     font-size: 17px;
   }
   
@@ -42,7 +57,7 @@ img{
   color: #fff;
   font-size: 1.5em;
   font-weight: bold;
-  font-family: Helvetica;
+  font-family: 'Pacifico', cursive;
   text-shadow: 
     0 1px 0 #488148, 
     0 2px 0 #488148, 
@@ -75,6 +90,7 @@ img{
   position: relative;
   text-transform: uppercase;
   color: #000;
+  font-family: 'Pacifico', cursive;
 }
 .aboutus-title::after {
   background: #488148 none repeat scroll 0 0;
@@ -167,3 +183,9 @@ a:hover, a:active {
   width: 70px;
 }
 
+/* Video section */
+#section2 {
+  padding-top:50px;
+  height:500px;
+  color: #fff; 
+  background-color: #488148;}
